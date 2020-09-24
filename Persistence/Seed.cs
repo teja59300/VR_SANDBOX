@@ -23,8 +23,8 @@ namespace Persistence
                         PhoneNumber = "1234567890",
                         Address = "Alampuram",
                         Status = "Done",
-                        NoOfAcres = 2,
-                        Amount = 1000
+                        NoOfAcres = "2",
+                        Amount = "1000"
                     },
                     new Activity
                     {
@@ -34,8 +34,8 @@ namespace Persistence
                         PhoneNumber = "1234567890",
                         Address = "Alampuram",
                         Status = "Scheduled",
-                        NoOfAcres = 2,
-                        Amount = 1000
+                        NoOfAcres = "2",
+                        Amount = "1000"
                     },
                     new Activity
                     {
@@ -45,8 +45,8 @@ namespace Persistence
                         PhoneNumber = "1234567890",
                         Address = "Alampuram",
                         Status = "Scheduled",
-                        NoOfAcres = 3,
-                        Amount = 1500
+                        NoOfAcres = "3",
+                        Amount = "1500"
                     },
                     new Activity
                     {
@@ -56,8 +56,8 @@ namespace Persistence
                         PhoneNumber = "1234567890",
                         Address = "Alampuram",
                         Status = "Agreed",
-                        NoOfAcres = 1,
-                        Amount = 500
+                        NoOfAcres = "1",
+                        Amount = "500"
                     },
                     new Activity
                     {
@@ -67,8 +67,8 @@ namespace Persistence
                         PhoneNumber = "1234567890",
                         Address = "Alampuram",
                         Status = "Agreed",
-                        NoOfAcres = 1,
-                        Amount = 500
+                        NoOfAcres = "1",
+                        Amount = "500"
                     },
                     new Activity
                     {
@@ -78,8 +78,8 @@ namespace Persistence
                         PhoneNumber = "1234567890",
                         Address = "Alampuram",
                         Status = "Rejected",
-                        NoOfAcres = 2,
-                        Amount = 1000
+                        NoOfAcres = "2",
+                        Amount = "1000"
                     },
                     new Activity
                     {
@@ -89,8 +89,8 @@ namespace Persistence
                         PhoneNumber = "1234567890",
                         Address = "Alampuram",
                         Status = "Rejected",
-                        NoOfAcres = 2,
-                        Amount = 1000
+                        NoOfAcres = "2",
+                        Amount = "1000"
                     },
                     new Activity
                     {
@@ -100,8 +100,8 @@ namespace Persistence
                         PhoneNumber = "1234567890",
                         Address = "Alampuram",
                         Status = "Missed",
-                        NoOfAcres = 2,
-                        Amount = 1000
+                        NoOfAcres = "2",
+                        Amount = "1000"
                     },
                     new Activity
                     {
@@ -111,8 +111,8 @@ namespace Persistence
                         PhoneNumber = "1234567890",
                         Address = "Alampuram",
                         Status = "Missed",
-                        NoOfAcres = 2,
-                        Amount = 1000
+                        NoOfAcres = "2",
+                        Amount = "1000"
                     },
                     new Activity
                     {
@@ -122,8 +122,8 @@ namespace Persistence
                         PhoneNumber = "1234567890",
                         Address = "Alampuram",
                         Status = "Others",
-                        NoOfAcres = 2,
-                        Amount = 1000
+                        NoOfAcres = "2",
+                        Amount = "1000"
                     }
                 };
                 

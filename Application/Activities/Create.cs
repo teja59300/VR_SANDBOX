@@ -17,8 +17,8 @@ namespace Application.Activities
             public string Address { get; set; }
             public DateTime Date { get; set; }
             public string Description { get; set; }
-            public int NoOfAcres { get; set; }
-            public int Amount { get; set; }
+            public string NoOfAcres { get; set; }
+            public string Amount { get; set; }
             public string Status { get; set; }
         }
 
