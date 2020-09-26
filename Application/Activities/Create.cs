@@ -50,7 +50,7 @@ namespace Application.Activities
                 {
                     return Unit.Value;
                 }
-                throw new Exception("problem saving changes ");
+                throw new Exception("problem saving changes");
 
             }
         }
