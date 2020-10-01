@@ -1,7 +1,9 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 using Domain;
+using FluentValidation;
 using MediatR;
 using Persistence;
 
@@ -22,6 +24,20 @@ namespace Application.Activities
             public string Status { get; set; }
         }
 
+        public class CommandValidator:AbstractValidator<Command>
+        {
+                public CommandValidator()
+                {
+                    RuleFor(x => x.Name).NotEmpty();
+                    RuleFor(x => x.PhoneNumber).NotEmpty();
+                    RuleFor(x => x.Address).NotEmpty();
+                    RuleFor(x => x.Date).NotEmpty();
+                    RuleFor(x => x.Description).NotEmpty();
+                    RuleFor(x => x.NoOfAcres).NotEmpty();
+                    RuleFor(x => x.Amount).NotEmpty();
+                    RuleFor(x => x.Status).NotEmpty();
+                }
+        }
         public class Handler : IRequestHandler<Command>
         {
             private readonly DataContext _context;

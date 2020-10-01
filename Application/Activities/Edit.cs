@@ -1,6 +1,9 @@
 using System;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Errors;
+using FluentValidation;
 using MediatR;
 using Persistence;
 
@@ -20,7 +23,21 @@ namespace Application.Activities
                             public string Amount { get; set; }
                             public string Status { get; set; }   
                 }
-        
+
+                public class CommandValidator:AbstractValidator<Command>
+                {
+                    public CommandValidator()
+                    {
+                        RuleFor(x => x.Name).NotEmpty();
+                        RuleFor(x => x.PhoneNumber).NotEmpty();
+                        RuleFor(x => x.Address).NotEmpty();
+                        RuleFor(x => x.Date).NotEmpty();
+                        RuleFor(x => x.Description).NotEmpty();
+                        RuleFor(x => x.NoOfAcres).NotEmpty();
+                        RuleFor(x => x.Amount).NotEmpty();
+                        RuleFor(x => x.Status).NotEmpty();
+                }
+        }
                 public class Handler : IRequestHandler<Command>
                 {
                     private readonly DataContext _context;
@@ -35,7 +52,10 @@ namespace Application.Activities
 
                         if(activity == null)
                         {
-                            throw new Exception("could not find activity");
+                            if(activity == null)
+                        {
+                            throw new RestException(HttpStatusCode.NotFound, new {activity = "Nof Found"});
+                        }
                         }
                         activity.Name= request.Name ?? activity.Name;
                         activity.PhoneNumber= request.PhoneNumber ?? activity.PhoneNumber;
