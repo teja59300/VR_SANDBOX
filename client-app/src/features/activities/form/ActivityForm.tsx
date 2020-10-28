@@ -23,7 +23,8 @@ const validate = combineValidators({
     status : isRequired('Status'),
     description : composeValidators (
       isRequired('Description'),
-      hasLengthGreaterThan(4)({message : 'Description should contain 5 characters'})),
+      hasLengthGreaterThan(4)({message : 'Description should contain 5 characters'})
+      )(),
     amount : isRequired('Amount'),
     date : isRequired('Date'),
     noOfAcres:isRequired("NoOf Acres"),
