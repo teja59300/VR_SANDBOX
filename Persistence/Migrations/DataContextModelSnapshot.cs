@@ -120,30 +120,51 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Financial", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<Guid?>("ActivityId")
+                    b.Property<Guid>("ActivityId")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("NetProfit")
+                    b.Property<string>("Expenditure")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("FinancialId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("TotalAcres")
+                    b.Property<string>("Profit")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("TotalAcresDone")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("TotalActivities")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("TotalAmount")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ActivityId");
+
+                    b.ToTable("Financials");
+                });
+
+            modelBuilder.Entity("Domain.UserActivity", b =>
+                {
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("ActivityId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("DateJoined")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsHost")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("TotalAmount")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("TotalExpenses")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
+                    b.HasKey("AppUserId", "ActivityId");
 
                     b.HasIndex("ActivityId");
 
-                    b.ToTable("Financials");
+                    b.ToTable("UserActivities");
                 });
 
             modelBuilder.Entity("Domain.Value", b =>
@@ -308,8 +329,25 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Financial", b =>
                 {
                     b.HasOne("Domain.Activity", "Activity")
-                        .WithMany()
-                        .HasForeignKey("ActivityId");
+                        .WithMany("Financials")
+                        .HasForeignKey("ActivityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.UserActivity", b =>
+                {
+                    b.HasOne("Domain.Activity", "Activity")
+                        .WithMany("UserActivities")
+                        .HasForeignKey("ActivityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.AppUser", "AppUser")
+                        .WithMany("UserActivities")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -4,12 +4,14 @@ namespace Domain
 {
     public class Financial
     {
-        public int Id { get; set; }
-        public int TotalAmount { get; set; }
-        public int TotalAcres { get; set; }
-        public int TotalExpenses { get; set; }
-        public int NetProfit { get; set; }
-        public Activity Activity { get; set; }
-        
+        public int FinancialId { get; set; }
+        public Guid ActivityId { get; set; }
+        public virtual Activity Activity { get; set; }
+        public string TotalActivities { get; set; }
+        public string TotalAmount { get; set; }
+        public string TotalAcresDone { get; set; }
+        public string Expenditure { get; set; }
+        public string Profit { get; set; }
+
     }
 }

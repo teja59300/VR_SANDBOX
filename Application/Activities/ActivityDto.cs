@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
-namespace Domain
+namespace Application.Activities
 {
-    public class Activity
+    public class ActivityDto
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
@@ -14,7 +15,7 @@ namespace Domain
         public string NoOfAcres { get; set; }
         public string Amount  { get; set; }
         public string Status { get; set; }
-        public virtual ICollection<UserActivity> UserActivities { get; set; }
-        public virtual ICollection<Financial> Financials { get; set; }
+        [JsonPropertyName("attendees")]
+        public ICollection<AttendeeDto> UserActivities { get; set; }
     }
 }

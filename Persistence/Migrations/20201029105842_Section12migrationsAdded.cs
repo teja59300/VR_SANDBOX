@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class AllInOneMigration : Migration
+    public partial class Section12migrationsAdded : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -83,23 +83,23 @@ namespace Persistence.Migrations
                 name: "Financials",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    TotalAmount = table.Column<int>(nullable: false),
-                    TotalAcres = table.Column<int>(nullable: false),
-                    TotalExpenses = table.Column<int>(nullable: false),
-                    NetProfit = table.Column<int>(nullable: false),
-                    ActivityId = table.Column<Guid>(nullable: true)
+                    ActivityId = table.Column<Guid>(nullable: false),
+                    FinancialId = table.Column<int>(nullable: false),
+                    TotalActivities = table.Column<string>(nullable: true),
+                    TotalAmount = table.Column<string>(nullable: true),
+                    TotalAcresDone = table.Column<string>(nullable: true),
+                    Expenditure = table.Column<string>(nullable: true),
+                    Profit = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Financials", x => x.Id);
+                    table.PrimaryKey("PK_Financials", x => x.ActivityId);
                     table.ForeignKey(
                         name: "FK_Financials_Activities_ActivityId",
                         column: x => x.ActivityId,
                         principalTable: "Activities",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -208,6 +208,32 @@ namespace Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "UserActivities",
+                columns: table => new
+                {
+                    AppUserId = table.Column<string>(nullable: false),
+                    ActivityId = table.Column<Guid>(nullable: false),
+                    DateJoined = table.Column<DateTime>(nullable: false),
+                    IsHost = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserActivities", x => new { x.AppUserId, x.ActivityId });
+                    table.ForeignKey(
+                        name: "FK_UserActivities_Activities_ActivityId",
+                        column: x => x.ActivityId,
+                        principalTable: "Activities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserActivities_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "Values",
                 columns: new[] { "Id", "Name" },
@@ -261,8 +287,8 @@ namespace Persistence.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Financials_ActivityId",
-                table: "Financials",
+                name: "IX_UserActivities_ActivityId",
+                table: "UserActivities",
                 column: "ActivityId");
         }
 
@@ -287,16 +313,19 @@ namespace Persistence.Migrations
                 name: "Financials");
 
             migrationBuilder.DropTable(
+                name: "UserActivities");
+
+            migrationBuilder.DropTable(
                 name: "Values");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Activities");
 
             migrationBuilder.DropTable(
-                name: "Activities");
+                name: "AspNetUsers");
         }
     }
 }
